@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>czml - Leylines-Documentation</title>
+    <title>geometry.mjs - Leylines-Documentation</title>
     
     
     
@@ -43,143 +43,113 @@
 
 <div id="main">
     
-    <h1 class="page-title">czml</h1>
+    <h1 class="page-title">geometry.mjs</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
-
-<article>
-    
-        <div class="container-overview">
-        
-            
-                <div class="description usertext"><p>Write czml</p></div>
-            
-
-            
-                
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="czml.mjs.html">czml.mjs</a>, <a href="czml.mjs.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>Jörg Roth</li>
-        </ul>
-    </dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-        
-        </div>
-    
-
-    
-
-    
-
-    
-    
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** translation to prepare for output
+ * @module  geometry
+ * @author  Jörg Roth
+ */
+
+import { createCzmlHeader, createCzmlPolyline, createCzmlPoint } from './czml.mjs';
+import { createKmlHeader, createKmlFooter, createKmlLinestring, createKmlPoint } from './kml.mjs';
+
+export function createHeader({ outFormat }={}) {
+
+  var result;
+
+  switch (outFormat) {
+  case 'kml':
+    result = '';
+    break;
+  case 'czml':
+    result = [];
+    break;
+  }
+
+  switch (outFormat) {
+  case 'kml':
+    result += createKmlHeader();
+    break;
+  case 'czml':
+    result.push(createCzmlHeader());
+    break;
+  }
+
+  return result;
+}
+
+export function createFooter({ outFormat, result }={}) {
+
+  switch (outFormat) {
+  case 'kml':
+    result += createKmlFooter();
+    break;
+  case 'czml':
+    result = JSON.stringify(result);
+    break;
+  }
+
+  return result;
+}
+
+export function createPoint({ outFormat, result,
+  id,
+  name,
+  description,
+  values,
+  outlineColor,
+  color,
+  icon
+}={}) {
+
+  switch (outFormat) {
+  case 'kml':
+    result += createKmlPoint({id: id, name: name, description: description, values: values});
+    break;
+  case 'czml':
+    result.push(createCzmlPoint({id: id, name: name, description: description, values: values, outlineColor, color, icon}));
+    break;
+  }
+
+  return result;
+}
+
+export function createPolyline({outFormat, result,
+  id,
+  name,
+  description,
+  values,
+  linewidth,
+  color,
+  type,
+  arcType,
+  clampToGround,
+  materialType,
+  distanceDisplayCondition
+}={}) {
+
+  switch (outFormat) {
+  case 'kml':
+    result += createKmlLinestring({id: id, name: name, description: description, values: values, linewidth: linewidth/2, color: color, materialType: materialType, type: type});
+    break;
+  case 'czml':
+    result.push(createCzmlPolyline({id: id, name: name, description: description, values: values, linewidth: linewidth, color: color, materialType: materialType, type: type, arcType: arcType, clampToGround: clampToGround, distanceDisplayCondition: distanceDisplayCondition}));
+    break;
+  }
+
+  return result;
+}
+</code></pre>
+        </article>
+    </section>
 
 
 
