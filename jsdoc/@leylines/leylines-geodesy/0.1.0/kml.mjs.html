@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>kml.mjs - Leylines-Documentation</title>
+    
+    
+    
+    
+    
+    <meta property="og:title" content="Leylines-Documentation"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content=""/>
+    
+    <meta property="og:url" content=""/>
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://www.leylines.net" target="_blank" class="menu-item" id="website_link" >leylines.net</a></h2><h3>Modules</h3><ul><li><a href="module-czml.html">czml</a></li><li><a href="module-geoTools.html">geoTools</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-geoTools.html#.degrees_to_radians">degrees_to_radians</a></li><li data-type='method' style='display: none;'><a href="module-geoTools.html#.getInitialValues">getInitialValues</a></li><li data-type='method' style='display: none;'><a href="module-geoTools.html#.greatCirclePoints">greatCirclePoints</a></li><li data-type='method' style='display: none;'><a href="module-geoTools.html#.radians_to_degrees">radians_to_degrees</a></li></ul></li><li><a href="module-kml.html">kml</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-kml.html#.createKmlFooter">createKmlFooter</a></li><li data-type='method' style='display: none;'><a href="module-kml.html#.createKmlHeader">createKmlHeader</a></li><li data-type='method' style='display: none;'><a href="module-kml.html#.createKmlLinestring">createKmlLinestring</a></li><li data-type='method' style='display: none;'><a href="module-kml.html#.createKmlPoint">createKmlPoint</a></li></ul></li><li><a href="module-tools.html">tools</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-tools.html#.RGBToHex">RGBToHex</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">kml.mjs</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** Write kml
+ * @module  kml
+ * @author  Jörg Roth
+ */
+
+import { RGBToHex } from './tools.mjs';
+
+/**
+ * create kml-header
+ * @return {string} header
+ */
+export function createKmlHeader() {
+  return '&lt;?xml version="1.0" encoding="UTF-8"?>\n&lt;kml xmlns="http://www.opengis.net/kml/2.2">&lt;Document>';
+}
+
+/**
+ * create kml-footer
+ * @return {string} footer
+ */
+export function createKmlFooter() {
+  return '&lt;/Document>&lt;/kml>';
+}
+
+/**
+ * create kml-linestring
+ * @param {string} id - unique id
+ * @param {string} name - name
+ * @param {string} description - description
+ * @param {string} values - values
+ * @param {array} [color=[255, 0, 0, 255]] - color of line
+ * @param {boolean} [clampToGround=true] - clamp to ground
+ * @param {integer} [linewidth=10] -line width
+ * @return {string} kml-linestring
+ */
+export function createKmlLinestring({ id, name, description, values,
+  color = [255, 0, 0, 255],
+  clampToGround = true,
+  linewidth = 10
+}={}) {
+
+  let kmlCoords = [];
+  while (values.length > 0) {
+    kmlCoords.push(values.splice(0, 3));
+  }
+  kmlCoords = kmlCoords.join(' ');
+
+  let kmlLineString = '&lt;Placemark id="' + id + '">';
+
+  kmlLineString += '&lt;name>' +  name + '&lt;/name>';
+  kmlLineString += '&lt;description>' +  description + '&lt;/description>';
+
+  kmlLineString += '&lt;Style>&lt;LineStyle>';
+  kmlLineString += '&lt;color>' + RGBToHex(color[0], color[1], color[2], color[3]) + '&lt;/color>';
+  kmlLineString += '&lt;width>' + linewidth + '&lt;/width>';
+  kmlLineString += '&lt;/LineStyle>&lt;/Style>';
+
+  kmlLineString += '&lt;LineString>';
+  kmlLineString += '&lt;tessellate>true&lt;/tessellate>';
+
+  if (clampToGround) {
+    kmlLineString += '&lt;altitudeMode>clampToGround&lt;/altitudeMode>';
+  } else {
+    kmlLineString += '&lt;altitudeMode>absolute&lt;/altitudeMode>';
+  }
+
+  kmlLineString += '&lt;coordinates>';
+  
+  kmlLineString += kmlCoords;
+
+  kmlLineString += '&lt;/coordinates>';
+  kmlLineString += '&lt;/LineString>';
+  kmlLineString += '&lt;/Placemark>';
+
+  return kmlLineString;
+}
+
+/**
+ * create kml-point
+ * @param {string} id - unique id
+ * @param {string} name - name
+ * @param {string} description - description
+ * @param {string} values - values
+ * @param {array} [color=[255, 0, 0, 255]] - color of line
+ * @param {string=} icon - reference to icon 
+ * @return {string} kml-point
+ */
+export function createKmlPoint({ id, name, description, values,
+  color = [255, 255, 255, 255],
+  icon
+}={}) {
+
+  let kmlPoint = '&lt;Placemark id="' + id + '">';
+
+  kmlPoint += '&lt;name>' +  name + '&lt;/name>';
+  kmlPoint += '&lt;description>' +  description + '&lt;/description>';
+
+  kmlPoint += '&lt;Style>';
+  kmlPoint += '&lt;Icon>http://maps.google.com/mapfiles/kml/shapes/placemark_circle_highlight.png&lt;/Icon>';
+  kmlPoint += '&lt;/Style>';
+
+  kmlPoint += '&lt;Point>';
+
+  kmlPoint += '&lt;coordinates>';
+
+  kmlPoint += values;
+
+  kmlPoint += '&lt;/coordinates>';
+  kmlPoint += '&lt;/Point>';
+  kmlPoint += '&lt;/Placemark>';
+
+  return kmlPoint;
+
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Thu Jun 11 2020 14:16:22 GMT+0200 (Mitteleuropäische Sommerzeit) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>
