@@ -1,0 +1,1625 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.3.0">
+    
+    
+      
+        <title>Deploying to AWS - Leylines-Docu</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6e35a1a6.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prerequisites" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="Leylines-Docu" class="md-header-nav__button md-logo" aria-label="Leylines-Docu">
+      
+  <img src="../../leylines-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Leylines-Docu
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Deploying to AWS
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Leylines-Docu" class="md-nav__button md-logo" aria-label="Leylines-Docu">
+      
+  <img src="../../leylines-logo.png" alt="logo">
+
+    </a>
+    Leylines-Docu
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Customizing
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Customizing" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Customizing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../customizing/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../customizing/client-side-config/" title="Client-side Config" class="md-nav__link">
+      Client-side Config
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../customizing/initialization-files/" title="Initialization Files" class="md-nav__link">
+      Initialization Files
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../customizing/server-side-config/" title="Server-side Config" class="md-nav__link">
+      Server-side Config
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../customizing/skinning/" title="Skinning" class="md-nav__link">
+      Skinning
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Connecting to Data
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Connecting to Data" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Connecting to Data
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/cross-origin-resource-sharing/" title="Cross-Origin Resource Sharing" class="md-nav__link">
+      Cross-Origin Resource Sharing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-groups/" title="Catalog Groups" class="md-nav__link">
+      Catalog Groups
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-items/" title="Catalog Items" class="md-nav__link">
+      Catalog Items
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5">
+    
+    <label class="md-nav__link" for="nav-4-5">
+      Customizing Data Appearance
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Customizing Data Appearance" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Customizing Data Appearance
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/customizing-data-appearance/overview/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/customizing-data-appearance/imagery-data/" title="Imagery Data" class="md-nav__link">
+      Imagery Data
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/customizing-data-appearance/tabular-data/" title="Tabular Data" class="md-nav__link">
+      Tabular Data
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/customizing-data-appearance/feature-info-template/" title="Feature Information Template" class="md-nav__link">
+      Feature Information Template
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-functions/" title="Catalog Functions" class="md-nav__link">
+      Catalog Functions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-7" type="checkbox" id="nav-4-7">
+    
+    <label class="md-nav__link" for="nav-4-7">
+      Catalog Type Details
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Catalog Type Details" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Catalog Type Details
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/abs-itt-dataset-list/" title="ABS ITT (group)" class="md-nav__link">
+      ABS ITT (group)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/abs-itt/" title="ABS ITT (item)" class="md-nav__link">
+      ABS ITT (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/esri-featureServer-group/" title="ArcGIS FeatureServer (group)" class="md-nav__link">
+      ArcGIS FeatureServer (group)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/esri-featureServer/" title="ArcGIS FeatureServer (item)" class="md-nav__link">
+      ArcGIS FeatureServer (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/esri-mapServer-group/" title="ArcGIS MapServer (group)" class="md-nav__link">
+      ArcGIS MapServer (group)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/esri-mapServer/" title="ArcGIS MapServer (item)" class="md-nav__link">
+      ArcGIS MapServer (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/esri-group/" title="ArcGIS Server (group)" class="md-nav__link">
+      ArcGIS Server (group)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/bing-maps/" title="Bing Maps (item)" class="md-nav__link">
+      Bing Maps (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/carto/" title="Carto Map (item)" class="md-nav__link">
+      Carto Map (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/csw/" title="Catalog Service for the Web (CSW) (group)" class="md-nav__link">
+      Catalog Service for the Web (CSW) (group)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/3d-tiles/" title="Cesium 3D Tiles (item)" class="md-nav__link">
+      Cesium 3D Tiles (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/ion-imagery/" title="Cesium Ion Imagery (item)" class="md-nav__link">
+      Cesium Ion Imagery (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/czml/" title="Cesium Language (CZML) (item)" class="md-nav__link">
+      Cesium Language (CZML) (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/cesium-terrain/" title="Cesium Terrain (item)" class="md-nav__link">
+      Cesium Terrain (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/ckan/" title="CKAN (group)" class="md-nav__link">
+      CKAN (group)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/ckan-resource/" title="CKAN Resource (item)" class="md-nav__link">
+      CKAN Resource (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/csv/" title="Comma-Separated Values (CSV) (item)" class="md-nav__link">
+      Comma-Separated Values (CSV) (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/composite/" title="Composite (item)" class="md-nav__link">
+      Composite (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/ogr/" title="Format Conversion Service (based on OGR) (item)" class="md-nav__link">
+      Format Conversion Service (based on OGR) (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/geojson/" title="GeoJSON (item)" class="md-nav__link">
+      GeoJSON (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/gpx/" title="GPX (item)" class="md-nav__link">
+      GPX (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/group/" title="Group (Manual) (group)" class="md-nav__link">
+      Group (Manual) (group)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/kml/" title="Keyhole Markup Language (KML) (item)" class="md-nav__link">
+      Keyhole Markup Language (KML) (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/magda-distribution/" title="MAGDA Distribution (item)" class="md-nav__link">
+      MAGDA Distribution (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/mapbox-map/" title="Mapbox Map (item)" class="md-nav__link">
+      Mapbox Map (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/mvt/" title="Mapbox Vector Tile (item)" class="md-nav__link">
+      Mapbox Vector Tile (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/open-street-map/" title="OpenStreetMap (item)" class="md-nav__link">
+      OpenStreetMap (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/places-like-me-function/" title="Places Like Me (function)" class="md-nav__link">
+      Places Like Me (function)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/sdmx-json/" title="SDMX-JSON (item)" class="md-nav__link">
+      SDMX-JSON (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/sos/" title="Sensor Observation Service (SOS) (item)" class="md-nav__link">
+      Sensor Observation Service (SOS) (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/socrata/" title="Socrata (group)" class="md-nav__link">
+      Socrata (group)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/spatial-detailing-function/" title="Spatial Detailing (function)" class="md-nav__link">
+      Spatial Detailing (function)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/terria-json/" title="TerriaJS JSON (function)" class="md-nav__link">
+      TerriaJS JSON (function)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/url-template/" title="URL Template (item)" class="md-nav__link">
+      URL Template (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/wfs-getCapabilities/" title="Web Feature Service (WFS) (group)" class="md-nav__link">
+      Web Feature Service (WFS) (group)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/wfs/" title="Web Feature Service (WFS) (item)" class="md-nav__link">
+      Web Feature Service (WFS) (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/wms-getCapabilities/" title="Web Map Service (WMS) (group)" class="md-nav__link">
+      Web Map Service (WMS) (group)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/wms/" title="Web Map Service (WMS) (item)" class="md-nav__link">
+      Web Map Service (WMS) (item)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/wps/" title="Web Processing Service (WPS) (function)" class="md-nav__link">
+      Web Processing Service (WPS) (function)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/wps-getCapabilities/" title="Web Processing Service (WPS) (group)" class="md-nav__link">
+      Web Processing Service (WPS) (group)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/wfs-features-group/" title="WFS Features (group)" class="md-nav__link">
+      WFS Features (group)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connecting-to-data/catalog-type-details/why-am-i-special-function/" title="Why Am I Special (function)" class="md-nav__link">
+      Why Am I Special (function)
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Deploying
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Deploying" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Deploying
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deploying-terriamap/" title="Deploying TerriaMap" class="md-nav__link">
+      Deploying TerriaMap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Deploying to AWS
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Deploying to AWS" class="md-nav__link md-nav__link--active">
+      Deploying to AWS
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#awscli" class="md-nav__link">
+    awscli
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aws-credentials" class="md-nav__link">
+    AWS credentials
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#packagejson" class="md-nav__link">
+    package.json
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stackjson" class="md-nav__link">
+    stack.json
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy" class="md-nav__link">
+    Deploy
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-stack" class="md-nav__link">
+    Test stack
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-dns-alias" class="md-nav__link">
+    Update DNS alias
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    Troubleshooting
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deploying-with-kubernetes/" title="Deploying with Kubernetes" class="md-nav__link">
+      Deploying with Kubernetes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../setting-up-a-region-mapping-server/" title="Setting Up a Region Mapping Server" class="md-nav__link">
+      Setting Up a Region Mapping Server
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../setting-up-geoserver/" title="Setting Up Geoserver" class="md-nav__link">
+      Setting Up Geoserver
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../using-as-a-ckan-previewer/" title="Using as a CKAN Previewer" class="md-nav__link">
+      Using as a CKAN Previewer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../controlling-with-url-parameters/" title="Controlling with URL Parameters" class="md-nav__link">
+      Controlling with URL Parameters
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../controlling-in-an-iframe-or-popup/" title="Controlling in an <iframe> or Popup" class="md-nav__link">
+      Controlling in an &lt;iframe&gt; or Popup
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Contributing
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Contributing" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Contributing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/development-environment/" title="Development Environment" class="md-nav__link">
+      Development Environment
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/architecture/" title="Architecture" class="md-nav__link">
+      Architecture
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/using-a-custom-version-of-cesium/" title="Using a Custom Version of Cesium" class="md-nav__link">
+      Using a Custom Version of Cesium
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/setting-up-saucelabs/" title="Setting up Saucelabs" class="md-nav__link">
+      Setting up Saucelabs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/problems-and-solutions/" title="Problems and Solutions" class="md-nav__link">
+      Problems and Solutions
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Acknowledgements
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Acknowledgements" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Acknowledgements
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../acknowledgements/attributions/" title="Attributions" class="md-nav__link">
+      Attributions
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#awscli" class="md-nav__link">
+    awscli
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aws-credentials" class="md-nav__link">
+    AWS credentials
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#packagejson" class="md-nav__link">
+    package.json
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stackjson" class="md-nav__link">
+    stack.json
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy" class="md-nav__link">
+    Deploy
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-stack" class="md-nav__link">
+    Test stack
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-dns-alias" class="md-nav__link">
+    Update DNS alias
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    Troubleshooting
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                  <h1>Deploying to AWS</h1>
+                
+                <p>Most of our production TerriaJS-based sites are hosted on Amazon Web Services (AWS).  This page describes how to use the automated AWS deployment mechanism available in TerriaMap.  There are, of course, countless other ways to deploy to AWS.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<h3 id="awscli">awscli</h3>
+<p>Deploying requires a recent version of <code>awscli</code>. It's recommended to install and maintain this using <code>pip</code> as the Homebrew and Ubuntu packages are quite old.</p>
+<pre><code class="sh">pip install awscli
+</code></pre>
+
+<h3 id="aws-credentials">AWS credentials</h3>
+<p>You must have an <code>awscli</code> configuration profile (in <code>~/.aws/config</code>) with a name that matches <code>awsProfile</code> in <code>package.json</code>.  e.g.</p>
+<pre><code>[profile terria]
+aws_access_key_id=YOUR_ACCESS_KEY
+aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
+</code></pre>
+
+<h2 id="packagejson">package.json</h2>
+<p>Various parameters controlling AWS deployment are specified in <code>package.json</code>.  They are:</p>
+<ul>
+<li><code>awsProfile</code> - The AWS profile to use (see AWS credentials above) when interacting with AWS.</li>
+<li><code>awsS3PackagesPath</code> - The S3 path to which to copy the deployment .tar.gz.</li>
+<li><code>awsRegion</code> - The AWS region in which to create resources.</li>
+<li><code>awsEc2InstanceType</code> - The type of EC2 instance to use.</li>
+<li><code>awsEc2ImageId</code> - The ID of the EC2 image to use.</li>
+<li><code>awsKeyName</code> - The name of a key that may be used to SSH to the EC2 instance.</li>
+<li><code>awsS3ServerConfigOverridePath</code> - The path to a file on S3 containing any overrides to <code>devserverconfig.json</code>.</li>
+<li><code>awsS3ClientConfigOverridePath</code> - The path to a file on S3 containing any overrides to <code>wwwroot/config.json</code>.</li>
+</ul>
+<p>You can customize these settings by changing <code>package.json</code>, or by using <code>npm config</code> to override the setting locally, for example;</p>
+<pre><code>npm config set terriajs-map:awsProfile myprofilename
+</code></pre>
+
+<h2 id="stackjson">stack.json</h2>
+<p>You will need to modify <a href="https://github.com/TerriaJS/TerriaMap/blob/master/deploy/aws/stack.json">deploy/aws/stack.json</a> to match your environment.  In particular, you will need to change:</p>
+<ul>
+<li><code>Parameters.HostedZoneName.Default</code>: This is the domain name where a DNS record for the deployment will be created.  </li>
+<li><code>SSLCertificateId</code> in <code>Resources.ElasticLoadBalancer.Listeners</code>: The SSL certificate to use for HTTPS connections to the deployment.  If you don't have a certificate or don't want to support HTTPS, remove the entire listener with <code>"LoadBalancerPort": "443"</code>.</li>
+<li><code>terriamap-sharing</code> in <code>Resources.S3Role.Properties.Policies.PolicyDocument.Statement</code>: This authorizes the EC2 instances to access an S3 bucket to be used to store JSON blobs for the sharing feature.  You will want to create a bucket for this purpose and add its name here.</li>
+</ul>
+<h2 id="deploy">Deploy</h2>
+<p>Prior to deploying, please tag the release, e.g.</p>
+<pre><code>git tag -a 2016-05-17 -m '2016-05-17 release'
+git push origin 2016-05-17
+</code></pre>
+
+<p>Deployment is initiated via <code>npm</code> scripts.  A full production deployment may be initiated with:</p>
+<pre><code>npm run deploy
+</code></pre>
+
+<p>Once the stack starts up, it will be available at <code>terriajs-map-2016-05-17.terria.io</code>, where <code>terriajs-map</code> is the name of the project in <code>package.json</code> and <code>2016-05-17</code> is the output of <code>git describe</code> (that's why you should tag before starting a deployment).</p>
+<p>The following npm scripts are available:</p>
+<ul>
+<li><code>deploy</code> - Removes the <code>node_modules</code> directory, runs <code>npm install</code>, and launches the <code>deploy-without-reinstall</code> script.</li>
+<li><code>deploy-without-reinstall</code> - Runs <code>gulp clean</code> (which removes the <code>wwwroot/build</code> directory) and <code>gulp release</code>, and then launches the <code>deploy-current</code> script.</li>
+<li><code>deploy-current</code> - Gets the two configuration override files specified in package.json from S3, builds a package (.tar.gz), uploads it to S3, and spins up a CloudFormation stack.</li>
+</ul>
+<p>The CloudFormation stack has the following AWS resources:</p>
+<ul>
+<li>Elastic Load Balancer</li>
+<li>EC2 Security Group</li>
+<li>Auto Scaling Group</li>
+<li>Launch Configurartion</li>
+<li>Route 53 Record Set</li>
+</ul>
+<p>Instances in the Auto Scaling group are bootstrapped using the supplied <code>user-data</code> file.</p>
+<p>The process of starting a new stack takes about 5 minutes but it can take a further 15 minutes for the DNS to propagate.</p>
+<h3 id="test-stack">Test stack</h3>
+<p>Each stack is automatically assigned its own URL based on the name of the stack. e.g.</p>
+<pre><code>https://terriajs-map-2016-05-17.terria.io/
+</code></pre>
+
+<h3 id="update-dns-alias">Update DNS alias</h3>
+<p>Once you're satisfied the release is working, change the staging environment DNS record to point to the new stack using the Route 53 Console.</p>
+<pre><code>map.terria.io -&gt; terriajs-map-2016-05-17.terria.io
+</code></pre>
+
+<h3 id="troubleshooting">Troubleshooting</h3>
+<p>The default Mac OS <code>tar</code> command <a href="http://superuser.com/questions/318809/linux-os-x-tar-incompatibility-tarballs-created-on-os-x-give-errors-when-unt">causes trouble</a>. You'll need to replace it with <code>gtar</code>, eg. using homebrew.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../deploying-terriamap/" title="Deploying TerriaMap" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Deploying TerriaMap
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../deploying-with-kubernetes/" title="Deploying with Kubernetes" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Deploying with Kubernetes
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.d710d30a.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a14cc5fd.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.7a2ea5ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
