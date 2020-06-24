@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>geoTools.mjs - Leylinesjs-Documentation</title>
+    
+    
+    
+    
+    
+    <meta property="og:title" content="Leylinesjs-Documentation"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content=""/>
+    
+    <meta property="og:url" content=""/>
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://www.leylines.net" target="_blank" class="menu-item" id="website_link" >leylines.net</a></h2><h3>Modules</h3><ul><li><a href="module-czml.html">czml</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-czml.html#.createCzmlHeader">createCzmlHeader</a></li><li data-type='method' style='display: none;'><a href="module-czml.html#.createCzmlPoint">createCzmlPoint</a></li><li data-type='method' style='display: none;'><a href="module-czml.html#.createCzmlPolyline">createCzmlPolyline</a></li></ul></li><li><a href="module-geoTools.html">geoTools</a></li><li><a href="module-kml.html">kml</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-kml.html#.createKmlFooter">createKmlFooter</a></li><li data-type='method' style='display: none;'><a href="module-kml.html#.createKmlHeader">createKmlHeader</a></li></ul></li><li><a href="module-tools.html">tools</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-tools.html#.RGBToHex">RGBToHex</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">geoTools.mjs</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** All kind of geographic tools
+ * @module   geoTools
+ * @author   Jörg Roth
+ * @requires NPM:geodesy
+ */
+
+import LatLon, { Dms } from 'geodesy/latlon-spherical.js';
+
+export function degrees_to_radians(degrees) {
+  var pi = Math.PI;
+  return degrees * (pi/180);
+}
+
+export function radians_to_degrees(radians) {
+  var pi = Math.PI;
+  return radians * (180/pi);
+}
+
+export function greatCirclePoints(sp, start, bearing, increment) {
+  let coords = [];
+  for (let i=start; i&lt;40000000; i=i+increment) {
+    let mp = sp.destinationPoint(i, bearing);
+    coords.push(mp.lon, mp.lat, 0);
+  }
+  return coords;
+}
+  
+export async function getInitialValues(points, sourcePoint, destinationPoint, bearing) {
+
+  if (!destinationPoint &amp;&amp; !bearing) {
+    throw new Error('No sourcepoint is defined!');
+  }
+
+  if (!destinationPoint &amp;&amp; !bearing) {
+    throw new Error('Neither desinationpoint nor bearing is defined!');
+  }
+
+  if (destinationPoint &amp;&amp; bearing) {
+    throw new Error('Both desinationpoint and bearing are defined!');
+  }
+
+  var result = [];
+
+  if (points[sourcePoint]) {
+    result['sp'] = [];
+    result['sp']['value']    = new LatLon(points[sourcePoint]['coords'][0], points[sourcePoint]['coords'][1]);
+    result['sp']['name']     = sourcePoint;
+    result['sp']['filename'] = sourcePoint;
+  } else if (sourcePoint) {
+    result['sp'] = [];
+    result['sp']['value']    = parse_input(sourcePoint);
+    result['sp']['name']     = Dms.toLat(result['sp']['value'].lat, 'dms') + ' / ' + Dms.toLon(result['sp']['value'].lon, 'dms');
+    result['sp']['filename'] = result['sp']['value'].lat + '-' + result['sp']['value'].lon;
+  } 
+
+  if (points[destinationPoint]) {
+    result['dp'] = [];
+    result['dp']['value']    = new LatLon(points[destinationPoint]['coords'][0], points[destinationPoint]['coords'][1]);
+    result['dp']['name']     = destinationPoint;
+    result['dp']['filename'] = destinationPoint;
+  } else if (destinationPoint) {
+    result['dp'] = [];
+    result['dp']['value']    = parse_input(destinationPoint);
+    result['dp']['name']     = Dms.toLat(result['dp']['value'].lat, 'dms') + ' / ' + Dms.toLon(result['dp']['value'].lon, 'dms');
+    result['dp']['filename'] = result['dp']['value'].lat + '-' + result['dp']['value'].lon;
+  }
+
+  if (bearing) {
+    result['ib-0'] = [];
+    result['ib-0']['value'] = parseFloat(bearing);
+    result['ib-0']['name'] = Dms.toBrng(result['ib-0']['value'],'dms');
+    result['filename'] = 'greatcircle-' + result['sp']['filename'] + '-' + bearing;
+  } else {
+    result['ib-0'] = [];
+    result['ib-0']['value'] = result['sp']['value'].initialBearingTo(result['dp']['value']);
+    result['ib-0']['name'] = Dms.toBrng(result['ib-0']['value'],'dms');
+    result['fb-0'] = [];
+    result['fb-0']['value'] = result['sp']['value'].finalBearingTo(result['dp']['value']);
+    result['fb-0']['name'] = Dms.toBrng(result['fb-0']['value'],'dms');
+    result['fb-90'] = [];
+    result['fb-90']['value'] = result['fb-0']['value'] + 90;
+    result['fb-90']['name'] = Dms.toBrng(result['fb-90']['value'],'dms');
+    result['filename'] = 'greatcircle-' + result['sp']['filename'] + '-' + result['dp']['filename'];
+  }
+
+  result['ib-90'] = [];
+  result['ib-90']['value'] = result['ib-0']['value'] + 90;
+  result['ib-90']['name'] = Dms.toBrng(result['ib-90']['value'],'dms');
+
+  return result;
+}
+
+function parse_input(input) {
+  let coords = input.split(/\s+/);
+  let lat = Dms.parse(coords[0]);
+  let lon = Dms.parse(coords[1]);
+  return new LatLon(lat, lon);
+}
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Wed Jun 24 2020 15:27:41 GMT+0200 (Central European Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

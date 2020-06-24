@@ -1,0 +1,34 @@
+{
+  "name": "leylines-docs",
+  "version": "0.0.1",
+  "description": "All the docu",
+  "config": {
+    "docRepo": "git@github.com:leylines/leylines-docs.git"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leylines/leylines-docs.git"
+  },
+  "author": "Joerg Roth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leylines/leylines-docs/issues"
+  },
+  "devDependencies": {
+    "docdash": "latest",
+    "fs-extra": "latest",
+    "generate-terriajs-schema": "latest",
+    "gulp": "latest",
+    "jsdoc": "latest",
+    "klaw-sync": "latest",
+    "leylines-cli": "leylines/leylines-cli#master",
+    "leylines-geodesy": "github:leylines/leylines-geodesy#master",
+    "leylinesjs": "github:leylines/leylinesjs#master",
+    "plugin-error": "latest",
+    "yarn": "latest"
+  },
+  "scripts": {
+    "gulp": "gulp",
+	"publish-docs": "bash -c \"rm -rf docroot && mkdir docroot && gulp && cd docroot && git init && git remote add origin $npm_package_config_docRepo && git add . && git commit -m 'Generate Documentation' && git push -f origin HEAD:gh-pages && rm -rf build\""
+  }
+}
