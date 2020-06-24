@@ -29,6 +29,6 @@
   },
   "scripts": {
     "gulp": "gulp",
-	"publish-docs": "bash -c \"rm -rf docroot && mkdir docroot && gulp && cd docroot && git init && git remote add origin $npm_package_config_docRepo && git add . && git commit -m 'Generate Documentation' && git push -f origin HEAD:gh-pages && rm -rf build\""
+	"publish-docs": "bash -c \"rm -rf docroot && mkdir docroot && rm -rf build && gulp && cd docroot && git init && git remote add origin $npm_package_config_docRepo && git add . && git commit -m 'Generate Documentation' && git push -f origin HEAD:gh-pages\""
   }
 }
