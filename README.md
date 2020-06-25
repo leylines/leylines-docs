@@ -146,17 +146,14 @@ Project Link: [https://github.com/leylines/leylines-docs](https://github.com/ley
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
+[contributors-shield]: https://img.shields.io/github/contributors/leylines/leylines-docs.svg?style=flat-square
+[contributors-url]: https://github.com/leylines/leylines-docs/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/leylines/leylines-docs.svg?style=flat-square
+[forks-url]: https://github.com/leylines/leylines-docs/network/members
+[stars-shield]: https://img.shields.io/github/stars/leylines/leylines-docs.svg?style=flat-square
+[stars-url]: https://github.com/leylines/leylines-docs/stargazers
+[issues-shield]: https://img.shields.io/github/issues/leylines/leylines-docs.svg?style=flat-square
+[issues-url]: https://github.com/leylines/leylines-docs/issues
 [license-shield]: https://img.shields.io/github/license/leylines/leylines-docs.svg?style=flat-square
 [license-url]: https://github.com/leylines/leylines-docs/blob/master/LICENSE.md
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
 
