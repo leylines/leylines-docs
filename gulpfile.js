@@ -51,6 +51,7 @@ gulp.task('home-docs', function(done) {
 
     fse.copySync('buildprocess/mkdocs.yml', 'home/mkdocs.yml');
     fse.copySync('buildprocess/index-home.md', 'home/doc/index.md');
+    fse.copySync('buildprocess/leylines-sign.png', 'home/doc/leylines-sign.png');
     fse.copySync('buildprocess/index-build.html', 'docroot/index.html');
 
     var result = spawnSync('mkdocs', ['build', '--clean', '--config-file', 'mkdocs.yml'], {
