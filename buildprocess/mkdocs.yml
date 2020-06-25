@@ -1,0 +1,13 @@
+site_name: Leylines-Docu
+#cosmo|cyborg|readthedocs|yeti|journal|bootstrap|readable|united|simplex|flatly|spacelab|amelia|cerulean|slate|mkdocs
+#theme: readthedocs
+theme:
+    name: 'material'
+    logo: 'leylines-sign.png'
+docs_dir: 'doc'
+site_dir: '../docroot/home'
+markdown_extensions:
+  - markdown.extensions.admonition
+strict: true
+nav:
+- Home: 'index.md'

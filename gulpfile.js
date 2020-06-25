@@ -44,6 +44,27 @@ gulp.task('geodesy-docs', function(done) {
     done();
 });
 
+gulp.task('home-docs', function(done) {
+    var fse = require('fs-extra');
+    var PluginError = require('plugin-error');
+    var spawnSync = require('child_process').spawnSync;
+
+    fse.copySync('buildprocess/mkdocs.yml', 'home/mkdocs.yml');
+    fse.copySync('buildprocess/index-home.md', 'home/doc/index.md');
+    fse.copySync('buildprocess/index-build.html', 'docroot/index.html');
+
+    var result = spawnSync('mkdocs', ['build', '--clean', '--config-file', 'mkdocs.yml'], {
+        cwd: 'home',
+        stdio: 'inherit',
+        shell: false
+    });
+    if (result.status !== 0) {
+        throw new PluginError('home-docs', 'External module exited with an error.', { showStack: false });
+    }
+
+    done();
+});
+
 gulp.task('code-attribution', function userAttribution(done) {
     var spawnSync = require('child_process').spawnSync;
     
@@ -107,7 +128,6 @@ gulp.task('user-guide', gulp.series(gulp.parallel('make-schema', 'code-attributi
 
 gulp.task('docs', gulp.series('user-guide', 'reference-guide', function docs(done) {
     var fse = require('fs-extra');
-    fse.copySync('node_modules/leylinesjs/doc/index-built.html', 'docroot/index.html');
     fse.copySync('node_modules/leylinesjs/doc/CNAME', 'docroot/CNAME');
     done();
 }));
@@ -164,4 +184,4 @@ function addProperties(file, result) {
     }
 }
 
-gulp.task('default', gulp.series('docs', 'cli-docs', 'geodesy-docs'));
+gulp.task('default', gulp.series('docs', 'cli-docs', 'geodesy-docs', 'home-docs'));
