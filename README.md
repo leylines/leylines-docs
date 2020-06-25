@@ -11,7 +11,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/leylines/leylines-docs">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="buildprocess/leylines-sign.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Leylines-Documentation</h3>
