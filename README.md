@@ -10,7 +10,7 @@
 <br />
 <p align="center">
   <a href="https://www.leylines.net">
-    <img src="buildprocess/leylines-sign.png" alt="Logo" width="80" height="80">
+    <img src="https://www.leylines.net/img/leylines-sign.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Leylines-Documentation</h3>
@@ -29,8 +29,6 @@
   </p>
 </p>
 
-
-
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
@@ -46,8 +44,6 @@
 * [Contact](#contact)
 * [Acknowledgements](#acknowledgements)
 
-
-
 <!-- ABOUT THE PROJECT -->
 ## About
 
@@ -57,8 +53,6 @@ Documentation of the Leylines-related repositories
 
 * [JSDoc](https://jsdoc.app/)
 * [MkDocs](https://www.mkdocs.org/)
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -97,12 +91,10 @@ npm run publish-docs
 
 _For more examples, please refer to the [Documentation](https://docs.leylines.net)_
 
-
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
-
+See the [open issues](https://github.com/leylines/leylines-docs/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 ## Contributing
