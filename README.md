@@ -5,28 +5,26 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/leylines/leylines-docs">
+  <a href="https://www.leylines.net">
     <img src="buildprocess/leylines-sign.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Leylines-Documentation</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    leylines.net documents, researches and archives ley lines and places of high energy and tries to find a global network interconnectng local ley lines to a big energynet.
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://docs.leylines.net"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://www.leylines.net">Homepage</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://maps.leylines.net">The Map</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://hub.leylines.net">The Hub</a>
   </p>
 </p>
 
@@ -53,7 +51,6 @@
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
-leylines-docs
 There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
 
 Here's why:
