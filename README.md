@@ -2,10 +2,9 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[![Apache-2.0 License][license-shield]][license-url]
 
-<!-- PROJECT LOGO -->
+<!-- Leylines LOGO -->
 <br />
 <p align="center">
   <a href="https://www.leylines.net">
