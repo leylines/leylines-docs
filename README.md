@@ -3,6 +3,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![Apache-2.0 License][license-shield]][license-url]
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/S6S51HNJ6)
 
 <!-- Leylines LOGO -->
 <br />
