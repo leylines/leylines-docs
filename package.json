@@ -10,7 +10,7 @@
     "url": "git+https://github.com/leylines/leylines-docs.git"
   },
   "author": "Joerg Roth",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/leylines/leylines-docs/issues"
   },
@@ -22,8 +22,8 @@
     "jsdoc": "latest",
     "klaw-sync": "latest",
     "leylines-cli": "leylines/leylines-cli#master",
-    "leylines-geodesy": "github:leylines/leylines-geodesy#master",
-    "leylinesjs": "github:leylines/leylinesjs#master",
+    "leylines-geodesy": "leylines/leylines-geodesy#master",
+    "leylinesjs": "leylines/leylinesjs#master",
     "plugin-error": "latest",
     "yarn": "latest"
   },
