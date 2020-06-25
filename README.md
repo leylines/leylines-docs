@@ -132,7 +132,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@earthanddata](https://twitter.com/earthanddata) - info@leylines.net
+Joerg Roth - [@earthanddata](https://twitter.com/earthanddata) - info@leylines.net
 
 Project Link: [https://github.com/leylines/leylines-docs](https://github.com/leylines/leylines-docs)
 
