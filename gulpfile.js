@@ -18,7 +18,7 @@ gulp.task('reference-guide', function(done) {
     var runExternalModule = require('leylinesjs/buildprocess/runExternalModule');
 
     runExternalModule('jsdoc/jsdoc.js', [
-        '-c', './buildprocess/jsdoc.json'
+        '-c', './buildprocess/jsdoc-leylinesjs.json'
     ]);
 
     done();
@@ -87,10 +87,10 @@ gulp.task('user-guide', gulp.series(gulp.parallel('make-schema', 'code-attributi
     var PluginError = require('plugin-error');
     var spawnSync = require('child_process').spawnSync;
 
-    fse.copySync('node_modules/leylinesjs/doc/mkdocs.yml', 'build/mkdocs.yml');
-    fse.copySync('node_modules/leylinesjs/doc', 'build/doc');
+    fse.copySync('node_modules/leylinesjs/doc/mkdocs.yml', 'guide/mkdocs.yml');
+    fse.copySync('node_modules/leylinesjs/doc', 'guide/doc');
 
-    var files = klawSync('build/doc').map(o => o.path);
+    var files = klawSync('guide/doc').map(o => o.path);
     var markdown = files.filter(name => path.extname(name) === '.md');
     var readmes = markdown.filter(name => name.indexOf('README.md') === name.length - 'README.md'.length);
 
@@ -109,14 +109,14 @@ gulp.task('user-guide', gulp.series(gulp.parallel('make-schema', 'code-attributi
 
     // Replace README.md with index.md in mkdocs.yml.
     // Also replace swap in the actual path to mkdocs-material in node_modules.
-    var mkdocsyml = fse.readFileSync('build/mkdocs.yml', 'UTF-8');
+    var mkdocsyml = fse.readFileSync('guide/mkdocs.yml', 'UTF-8');
     mkdocsyml = mkdocsyml.replace(/README\.md/g, 'index.md');
-    fse.writeFileSync('build/mkdocs.yml', mkdocsyml, 'UTF-8');
+    fse.writeFileSync('guide/mkdocs.yml', mkdocsyml, 'UTF-8');
 
-    generateCatalogMemberPages('docroot/schema', 'build/doc/connecting-to-data/catalog-type-details');
+    generateCatalogMemberPages('docroot/schema', 'guide/doc/connecting-to-data/catalog-type-details');
 
     var result = spawnSync('mkdocs', ['build', '--clean', '--config-file', 'mkdocs.yml'], {
-        cwd: 'build',
+        cwd: 'guide',
         stdio: 'inherit',
         shell: false
     });

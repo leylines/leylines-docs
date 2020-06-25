@@ -12,6 +12,6 @@ strict: false
 nav:
 - Home: 'index.md'
 - TerriaJS-Docu: '../guide/index.html'
-- terriajs-Reference: '../reference/index.html'
+- terriajs-Reference: '../leylinesjs/7.11.5/index.html'
 - leylines-cli-Reference: '../leylines-cli/0.1.0/index.html'
 - leylines-geodesy-Reference: '../leylines-geodesy/0.1.0/index.html'

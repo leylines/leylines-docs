@@ -23,12 +23,12 @@
     "klaw-sync": "latest",
     "leylines-cli": "github:leylines/leylines-cli#master",
     "leylines-geodesy": "github:leylines/leylines-geodesy#master",
-    "leylinesjs": "leylines/leylinesjs#master",
+    "leylinesjs": "github:leylines/leylinesjs#master",
     "plugin-error": "latest",
     "yarn": "latest"
   },
   "scripts": {
     "gulp": "gulp",
-    "publish-docs": "bash -c \"rm -rf docroot && mkdir docroot && rm -rf build && rm -rf home && gulp && cd docroot && git init && git remote add origin $npm_package_config_docRepo && git add . && git commit -m 'Generate Documentation' && git push -f origin HEAD:gh-pages\""
+    "publish-docs": "bash -c \"rm -rf docroot && mkdir docroot && rm -rf guide && rm -rf home && gulp && cd docroot && git init && git remote add origin $npm_package_config_docRepo && git add . && git commit -m 'Generate Documentation' && git push -f origin HEAD:gh-pages\""
   }
 }

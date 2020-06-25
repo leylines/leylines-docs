@@ -1,6 +1,6 @@
 {
   "source": {
-    "include": ["node_modules/leylinesjs/lib"],
+    "include": ["node_modules/leylinesjs/lib", "node_modules/leylinesjs/package.json", "node_modules/leylinesjs/README.md"],
     "includePattern": ".+\\.((js(doc)?))$",
     "excludePattern": "((^|\\/|\\\\)_)|(^ThirdParty/)"
   },
@@ -15,7 +15,7 @@
     "recurse": true,
     "encoding": "utf8",
     "template": "node_modules/docdash",
-    "destination": "docroot/reference"
+    "destination": "docroot"
   },
   "docdash": {
     "static": true,
